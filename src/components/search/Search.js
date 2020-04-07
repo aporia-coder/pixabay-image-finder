@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ImageResults } from "../imageresults/ImageResults";
 import { TextField, MenuItem } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
 export const Search = () => {
@@ -26,15 +27,25 @@ export const Search = () => {
     }
   }, [text]);
 
+  const useStyles = makeStyles({
+    spacing: {
+      margin: "1rem 0",
+    },
+  });
+
+  const classes = useStyles();
+
   return (
     <div>
       <TextField
+        className={classes.spacing}
         label="Search Images"
         fullWidth={true}
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
       <TextField
+        className={classes.spacing}
         select
         label="Select"
         fullWidth={true}
@@ -47,7 +58,7 @@ export const Search = () => {
         <MenuItem value={15}>15</MenuItem>
         <MenuItem value={20}>20</MenuItem>
       </TextField>
-      {images.length > 0 ? <ImageResults images={images} /> : null}
+      {images.length > 0 && <ImageResults images={images} />}
     </div>
   );
 };
